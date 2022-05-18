@@ -10,5 +10,5 @@ This appliction allows you to write, save, edit and delete personal notes.
 - Try typing a note, saving it, and adding a new note. They can also be deleted. 
 
 ## Live Links
-- Deployed github pages link:
-- Deployed Heroku app: 
+- Deployed github pages link: https://alknight17.github.io/note-taker/
+- Deployed Heroku app: https://git.heroku.com/obscure-ocean-28323.git
