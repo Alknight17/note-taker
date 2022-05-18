@@ -10,15 +10,22 @@ module.exports = app => {
 
         // create GET route for api/notes
         app.get('/api/notes', function(req, res) {
+            /*fs.readFile('db/db.json', 'utf-8', (err, data) => {
+                if (err) throw err;
+                var notes = JSON.parse(data);*/
+                console.log('get note');
             res.json(notes);
+            // });
         });
 
         // create route to POST api/notes
         app.post('/api/notes', function(req, res) {
             let newNote = req.body;
+            newNote.id = require('uuid').v4();
             notes.push(newNote);
             updateDb();
             console.log('Added new note: ' + newNote.title);
+            res.json(notes);
         });
 
         // create GET route for one specific note
@@ -31,6 +38,7 @@ module.exports = app => {
             notes.splice(req.params.id, 1);
             updateDb();
             console.log("Note #" + req.params.id + " has been deleted");
+            res.json(notes);
         });
 
         // Show notes page when accesing notes route
