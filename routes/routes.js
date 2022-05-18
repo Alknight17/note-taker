@@ -13,34 +13,34 @@ module.exports = app => {
             res.json(notes);
         });
 
+        // create route to POST api/notes
+        app.post('/api/notes', function(req, res) {
+            let newNote = req.body;
+            notes.push(newNote);
+            updateDb();
+            console.log('Added new note: ' + newNote.title);
+        });
+
         // create GET route for one specific note
         app.get('/api/notes/:id', function(req, res) {
             res.json(notes[req.params.id]);
         });
 
+         // create route to DELETE specific note
+         app.delete('/api/notes/:id', function(req, res) {
+            notes.splice(req.params.id, 1);
+            updateDb();
+            console.log("Note #" + req.params.id + " has been deleted");
+        });
+
         // Show notes page when accesing notes route
         app.get('/notes', function(req, res) {
-            res.sendFile(path.join(_dirname, "../public/notes.html"));
+            res.sendFile(path.join(__dirname, "../public/notes.html"));
         });
 
         // Show index page when accesing other routes
         app.get('*', function(req, res) {
-            res.senfFile(path.join(__dirname, "../public/index.html"));
-        });
-
-        // create route to POST api/notes
-        app.post('api/notes', function(req, res) {
-            let newNote = req.body;
-            notes.push(newNote);
-            updateDb();
-            returnconsole.log('Added new note: ' + newNote.title);
-        });
-
-        // create route to DELETE specific note
-        app.delete('/api/notes/:id', function(req, res) {
-            notes.splice(req.params.id, 1);
-            updateDb();
-            console.log("Note #" + req.params.id + " has been deleted");
+            res.sendFile(path.join(__dirname, "../public/index.html"));
         });
 
         // create funtion to update the db.json file when editing/adding/deleting notes

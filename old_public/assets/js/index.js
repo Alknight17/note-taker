@@ -50,6 +50,7 @@ const deleteNote = (id) =>
     },
   });
 
+  // finds current notes if available and displays them
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -66,6 +67,7 @@ const renderActiveNote = () => {
   }
 };
 
+// gather new note data and place it into db
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -102,12 +104,13 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
 };
 
+// If note fileds are empty hide save button
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
@@ -173,11 +176,12 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname === './public/notes.html') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
+// complie/render list of notes
 getAndRenderNotes();
